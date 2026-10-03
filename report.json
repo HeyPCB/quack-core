@@ -1,0 +1,926 @@
+{
+  "parts": {
+    "bound": 119,
+    "unsourced": 0,
+    "conflicts": 0,
+    "refs_by_status": {
+      "bound": [
+        "J2",
+        "F1",
+        "F3",
+        "D1",
+        "R1",
+        "U1",
+        "R2",
+        "R3",
+        "R4",
+        "C1",
+        "C2",
+        "R5",
+        "Q1",
+        "Q2",
+        "R6",
+        "R7",
+        "J5",
+        "Q3",
+        "Q4",
+        "Q5",
+        "R8",
+        "R9",
+        "R10",
+        "R11",
+        "D2",
+        "U2",
+        "U3",
+        "Q6",
+        "R12",
+        "R13",
+        "R14",
+        "R15",
+        "R16",
+        "R17",
+        "R18",
+        "C3",
+        "C4",
+        "C5",
+        "J16",
+        "J6",
+        "C6",
+        "D3",
+        "J7",
+        "C7",
+        "D4",
+        "J8",
+        "C8",
+        "D5",
+        "J9",
+        "C9",
+        "D6",
+        "C10",
+        "C11",
+        "J12",
+        "J13",
+        "F2",
+        "Q7",
+        "U4",
+        "U5",
+        "U6",
+        "C12",
+        "C13",
+        "C14",
+        "C15",
+        "C16",
+        "C17",
+        "C18",
+        "C19",
+        "C20",
+        "C21",
+        "R21",
+        "R22",
+        "R23",
+        "R24",
+        "L1",
+        "D7",
+        "U7",
+        "J4",
+        "J3",
+        "F4",
+        "L2",
+        "C22",
+        "C23",
+        "C24",
+        "C25",
+        "C26",
+        "C27",
+        "C28",
+        "R25",
+        "R26",
+        "R27",
+        "R28",
+        "R29",
+        "R30",
+        "R31",
+        "R32",
+        "R33",
+        "D8",
+        "U8",
+        "C29",
+        "C30",
+        "C31",
+        "C32",
+        "R34",
+        "R35",
+        "J10",
+        "R38",
+        "C35",
+        "D9",
+        "J11",
+        "R39",
+        "C36",
+        "D10",
+        "J1",
+        "D11",
+        "D12",
+        "R40",
+        "R41",
+        "J14"
+      ],
+      "unsourced": [],
+      "conflict": []
+    },
+    "not_in_bom": [],
+    "extended_distinct": [
+      "C12624",
+      "C131337",
+      "C144394",
+      "C158012",
+      "C160390",
+      "C165948",
+      "C178980",
+      "C19077530",
+      "C2071106",
+      "C22374899",
+      "C23241",
+      "C23654",
+      "C2761614",
+      "C2845815",
+      "C2903470",
+      "C2906982",
+      "C2930060",
+      "C2930115",
+      "C2937625",
+      "C2941042",
+      "C2977552",
+      "C2983891",
+      "C3975165",
+      "C428721",
+      "C475914",
+      "C48467",
+      "C49851",
+      "C53444",
+      "C5355380",
+      "C7834",
+      "C81007",
+      "C82044",
+      "C93216",
+      "C965800"
+    ],
+    "extended_fee_usd": 102.0,
+    "findings": [
+      {
+        "code": "jlcpcb_extended_parts",
+        "severity": "info",
+        "detail": "34 distinct Extended parts, about $102 in JLC loading fees",
+        "fix": "swap an Extended part for a Basic one where the table lists one"
+      }
+    ],
+    "table": "lcsc_pinned.json",
+    "table_source": "HeyPCB runner/cache/jlcparts/cache.sqlite3, table jlc_components, queried 2026-09-26. Each row's `snapshot` is that row's fetched_at."
+  },
+  "compose": {
+    "components": 138,
+    "nets": 78,
+    "noConnects": [
+      "J1.2",
+      "J1.18",
+      "J1.20",
+      "J1.22",
+      "J1.23",
+      "J1.24",
+      "J1.25",
+      "J1.27",
+      "J1.28",
+      "J3.1",
+      "J3.3",
+      "J4.A6",
+      "J4.A7",
+      "J4.A8",
+      "J4.B6",
+      "J4.B7",
+      "J4.B8",
+      "U5.5",
+      "U7.1",
+      "U8.10",
+      "U8.14",
+      "U8.26",
+      "U8.27",
+      "U9.1",
+      "U9.5",
+      "U9.12",
+      "U9.13",
+      "U9.16"
+    ],
+    "ran": true,
+    "seconds": 3.0
+  },
+  "schematic": {
+    "paper": "A1",
+    "file": "quack_core.kicad_sch",
+    "ran": true,
+    "seconds": 8.8
+  },
+  "erc": {
+    "ran": true,
+    "errors": 0,
+    "warnings": 0,
+    "types": [],
+    "seconds": 1.2
+  },
+  "netlist": {
+    "ok": true,
+    "missing": [],
+    "extra": [],
+    "differ": [],
+    "nets": 78,
+    "ran": true,
+    "seconds": 0.2
+  },
+  "board": {
+    "footprints": 138,
+    "outline_mm": [
+      101.0,
+      51.5
+    ],
+    "stackup": {
+      "copper": 4,
+      "layers": [
+        "F.Cu",
+        "In1.Cu",
+        "In2.Cu",
+        "B.Cu"
+      ],
+      "planes": {
+        "In1.Cu": "GND"
+      },
+      "plane_layers": [
+        "In1.Cu"
+      ],
+      "signal_layers": [
+        "F.Cu",
+        "In2.Cu",
+        "B.Cu"
+      ],
+      "dfm_profile": "jlcpcb_4layer"
+    },
+    "ran": true,
+    "seconds": 2.3
+  },
+  "place": {
+    "parts": 138,
+    "log": [
+      "H1 -> (36.50, 5.00) rot 0 : rung 0 lock: on the trunk_top boss at CAD (-47.00, 14.00)",
+      "H2 -> (64.50, 5.00) rot 0 : rung 0 lock: on the trunk_top boss at CAD (-47.00, -14.00)",
+      "H3 -> (36.50, 42.12) rot 0 : rung 0 lock: on the trunk_top boss at CAD (-84.12, 14.00)",
+      "H4 -> (64.50, 42.12) rot 0 : rung 0 lock: on the trunk_top boss at CAD (-84.12, -14.00)",
+      "H5 -> (21.50, 12.50) rot 0 : rung 0 lock: Pi Zero 2 W mounting hole (58 x 23 mm pattern), CAD (-54.50, 29.00)",
+      "H6 -> (79.50, 12.50) rot 0 : rung 0 lock: Pi Zero 2 W mounting hole (58 x 23 mm pattern), CAD (-54.50, -29.00)",
+      "H7 -> (21.50, 35.50) rot 0 : rung 0 lock: Pi Zero 2 W mounting hole (58 x 23 mm pattern), CAD (-77.50, 29.00)",
+      "H8 -> (79.50, 35.50) rot 0 : rung 0 lock: Pi Zero 2 W mounting hole (58 x 23 mm pattern), CAD (-77.50, -29.00)",
+      "J1 -> (50.50, 12.50) rot 90 : rung 0 lock: socket centred on the Pi header: Pi pin 1 at (26.37, 13.77) = CAD (-55.77, +24.13); rot 90 puts pad 1 at the left end of the front row",
+      "J2 -> (85.50, 47.80) rot 90 : rung 0 lock: XT30 at the rear right (CAD -87.3, -35.0): pad 2 (+, the flat end of the housing) toward the fuse at (85.5, 42.8), pad 1 (-, the chamfered end) at the rear; |y| > 26 keeps its leads off the tongue",
+      "F1 -> (85.50, 35.67) rot 90 : rung 0 lock: 20 A fuse straight above the XT30's + pin",
+      "R1 -> (85.50, 27.81) rot 90 : rung 0 lock: 1 mOhm shunt straight above the fuse",
+      "Q1 -> (85.50, 20.30) rot 270 : rung 0 lock: Q1 drain pad against the shunt, source row facing Q2",
+      "Q2 -> (86.77, 13.44) rot 90 : rung 0 lock: Q2 source row facing Q1's, one lead pitch (1.27 mm) to the right, so all three source pairs face each other and both gates sit at the open ends of the gap (QS is three ~1 mm stubs); drain pad (VSYS) facing Q3's source row. Aligned, Q2's gate faced Q1's source 1 and the gate route cut it off (2026-10-02)",
+      "Q3 -> (86.77, 6.58) rot 90 : rung 0 lock: servo-kill FET at the front of the column, in line with Q2 so all three source leads face Q2's drain leads (VSYS is three ~1 mm stubs; offset by a lead pitch, only two faced and the measured VSYS cross-section was 1.8 mm, 2026-10-02); drain pad (VSERVO) toward the front-edge ports",
+      "D1 -> (80.50, 45.30) rot 90 : rung 0 lock: input TVS across the XT30 pins, left of it",
+      "F3 -> (90.60, 40.60) rot 90 : rung 0 lock: charger fuse beside the XT30's + pin, feeding the charger above it",
+      "F2 -> (93.50, 12.70) rot 0 : rung 0 lock: 5 A fuse for the face and Pi branch, its VSYS pad 2.5 mm from Q2's drain pad",
+      "J7 -> (97.70, 2.60) rot 180 : rung 0 lock: J7 right leg at the front right (CAD -44.6, -47.0), under the right hip slot",
+      "C10 -> (77.60, 4.25) rot 180 : rung 0 lock: 470 uF beside the kill FET's drain pad, + toward it",
+      "J6 -> (9.30, 2.60) rot 180 : rung 0 lock: J6 left leg at the front left (CAD -44.6, +45.9), under the left hip slot",
+      "J8 -> (20.50, 2.60) rot 180 : rung 0 lock: J8 neck chain at the front left, beside J6; its cable rises to the roof opening",
+      "C11 -> (28.60, 4.25) rot 0 : rung 0 lock: 470 uF at the left end of the servo rail, between J8 and the left boss",
+      "J12 -> (50.50, 4.55) rot 0 : rung 0 lock: J12 GH 12P (top entry) centred between the two front bosses, under the roof opening",
+      "J3 -> (97.00, 48.50) rot 180 : rung 0 lock: J3 balance lead at the rear right, beside the pack leads' gap (|y| > 26: leads clear of the tongue)",
+      "J9 -> (35.77, 49.00) rot 0 : rung 0 lock: J9 spare port at the rear, its leads 0.9 mm behind the tongue's end (x -91.0 < -90.1). In the rear-left corner its DATA line was left open on one build; at x 34.5 its 10 uF landed on the DATA side, where the 2.5 mm VSERVO class could not reach it; at x 35.77 the placer puts the 10 uF beside the boss and every connection routed (2026-10-02)",
+      "J10 -> (2.90, 33.00) rot 90 : rung 0 lock: J10 left foot at the left edge",
+      "J13 -> (3.40, 24.00) rot 90 : rung 0 lock: J13 face power at the left edge, under the left half of the roof opening",
+      "J11 -> (74.00, 49.00) rot 180 : rung 0 lock: J11 right foot at the rear, leads behind the tongue's end (x < -90.1)",
+      "J5 -> (50.50, 49.00) rot 180 : rung 0 lock: J5 backpack switch at the rear centre, leads behind the tongue's end (x < -90.1)",
+      "J16 -> (16.00, 47.50) rot 90 : rung 0 lock: J16 external UART header at the rear left (leads clear of the tongue)",
+      "U7 -> (63.00, 29.50) rot 0 : rung 0 lock: BQ25887 under the Pi's right half, where its satellites have room (beside the USB-C every analog pin was walled in and one was left open on each of three builds, 2026-10-02): VBUS and PMID on its top row, SW, SNS and BAT on its right side toward the inductor and their capacitors, the analog pins on its bottom row",
+      "L2 -> (68.00, 26.00) rot 0 : rung 0 lock: 1 uH above-right: pad 1 (PMID) toward the top row, pad 2 (SW) above the SW pins",
+      "F4 -> (58.10, 25.60) rot 270 : rung 0 lock: 2 A PTC where the long VBUS run from the USB-C ends: VBUS (0.6 mm class) on pad 1, VBUS_CHG on pad 2 beside the 1 uF",
+      "C22 -> (60.10, 25.60) rot 90 : rung 0 lock: VBUS 1 uF between the PTC and pin 23",
+      "C23 -> (63.00, 25.00) rot 180 : rung 0 lock: PMID 22 uF over the PMID pins, its PMID pad toward the inductor",
+      "C26 -> (67.90, 30.60) rot 270 : rung 0 lock: SNS 22 uF right of the SNS pins, below the SW line to the inductor",
+      "C27 -> (69.90, 30.60) rot 270 : rung 0 lock: second SNS 22 uF",
+      "C28 -> (68.40, 34.10) rot 270 : rung 0 lock: BAT 10 uF below the SNS capacitors",
+      "C24 -> (66.15, 33.80) rot 270 : rung 0 lock: BTST 47 nF under the BTST pin",
+      "C25 -> (64.40, 33.90) rot 270 : rung 0 lock: REGN 4.7 uF under the REGN pin, right of the TS / ILIM / MID / CBSET pins so they leave straight down",
+      "R28 -> (58.00, 37.20) rot 90 : rung 0 lock: TS divider top (REGN to TS) in a fan under the analog pins",
+      "R29 -> (59.60, 37.20) rot 90 : rung 0 lock: TS divider bottom",
+      "R27 -> (61.20, 37.20) rot 90 : rung 0 lock: ILIM 750 ohm in the fan",
+      "R30 -> (62.80, 37.20) rot 90 : rung 0 lock: MID 330 ohm in the fan",
+      "R31 -> (66.80, 37.50) rot 0 : rung 0 lock: CBSET 100 ohm right of the fan; left to the shelves, the fan's resistors walled the analog pins in (ILIM and MID open, 2026-10-02)",
+      "R33 -> (71.60, 34.00) rot 90 : rung 0 lock: CHG LED resistor (REGN to the LED) right of the charger's capacitors; placed by the placer it sat under the TS / ILIM / MID pins and MID was left open (2026-10-02)",
+      "R2 -> (80.20, 30.77) rot 180 : rung 0 lock: IN+ filter resistor on the shunt's fuse-side pad",
+      "R3 -> (80.20, 24.75) rot 180 : rung 0 lock: IN- filter resistor on the shunt's switch-side pad",
+      "R4 -> (80.20, 22.30) rot 180 : rung 0 lock: VBUS resistor on Q1's drain pad",
+      "R6 -> (81.00, 17.90) rot 270 : rung 0 lock: gate pull-up (QGATE to QS) left of the source gap: its QS pad level with the gap, where QS leaves between Q1's gate and Q2's drain pad, its gate pad below toward Q1's gate",
+      "R8 -> (92.15, 8.55) rot 180 : rung 0 lock: servo-kill gate pull-up: its VSYS pad over the aux fuse's VSYS pad, its gate pad toward Q3's gate",
+      "C7 -> (97.00, 8.55) rot 0 : rung 0 lock: J7's 10 uF under its V pin",
+      "D4 -> (100.00, 8.55) rot 90 : rung 0 lock: J7's DATA ESD at the right edge",
+      "J4 -> (98.30, 20.00) rot 90 : rung 2 edge connector on the right edge, mouth outward",
+      "R7 -> (77.50, 19.75) rot 0 : rung 3 block anchor at the brief's target (msw): gate pull-down to the switch line beside the pull-up",
+      "Q4 -> (72.00, 20.25) rot 0 : rung 3 block anchor at the brief's target (kill): servo-kill gate driver on the SK_G line, under the Pi",
+      "D2 -> (67.06, 18.71) rot 180 : rung 7 satellite of Q4.1 (SK_EN) (shelf T of Q4)",
+      "Q5 -> (72.56, 24.32) rot 90 : rung 7 satellite of Q4.1 (SK_EN) (shelf B of Q4)",
+      "R10 -> (68.06, 21.13) rot 0 : rung 7 satellite of Q4.1 (SK_EN) (shelf T of Q4)",
+      "R11 -> (72.19, 27.51) rot 180 : rung 7 satellite of Q5.1 (SERVO_KILL) (shelf L of Q5)",
+      "R9 -> (64.65, 21.20) rot 180 : rung 7 satellite of Q4.2 (SK_DRV) (shelf L of Q4)",
+      "C6 -> (6.80, 8.94) rot 270 : rung 7 satellite of J6.2 (VSERVO) (shelf B of J6)",
+      "D3 -> (9.30, 7.89) rot 270 : rung 7 satellite of J6.1 (SERVO_DATA) (shelf B of J6)",
+      "C8 -> (16.75, 8.94) rot 270 : rung 7 satellite of J8.2 (VSERVO) (shelf B of J8)",
+      "D5 -> (20.50, 7.34) rot 0 : rung 7 satellite of J8.1 (SERVO_DATA) (shelf B of J8)",
+      "D8 -> (92.00, 27.80) rot 0 : rung 3 block anchor at the brief's target (chg): CHG LED beside the USB-C, below the receptacle",
+      "R32 -> (58.45, 30.75) rot 0 : rung 7 satellite of U7.6 (CHG_INT) (shelf L of U7)",
+      "R25 -> (89.12, 25.00) rot 270 : rung 7 satellite of J4.A5 (U7_CC1) (shelf L of J4)",
+      "R26 -> (98.25, 13.31) rot 90 : rung 7 satellite of J4.B5 (U7_CC2) (shelf T of J4)",
+      "C9 -> (41.27, 42.66) rot 90 : rung 7 satellite of J9.2 (VSERVO) (shelf T of J9)",
+      "D6 -> (31.13, 49.00) rot 180 : rung 7 satellite of J9.1 (SERVO_DATA) (shelf L of J9)",
+      "R38 -> (2.03, 36.75) rot 180 : rung 7 satellite of J10.1 (J10_SW_RAW) (shelf L of J10)",
+      "D9 -> (4.65, 37.14) rot 270 : rung 7 satellite of J10.1 (J10_SW_RAW) (shelf B of J10)",
+      "C35 -> (2.13, 39.75) rot 180 : rung 7 satellite of R38.2 (FOOT_L) (shelf L of R38)",
+      "R39 -> (78.37, 50.00) rot 0 : rung 7 satellite of J11.1 (J11_SW_RAW) (shelf R of J11)",
+      "D10 -> (77.59, 47.50) rot 270 : rung 7 satellite of J11.1 (J11_SW_RAW) (shelf R of J11)",
+      "C36 -> (77.44, 43.60) rot 90 : rung 7 satellite of R39.2 (FOOT_R) (shelf T of R39)",
+      "U2 -> (36.00, 21.00) rot 0 : rung 3 block anchor at the brief's target (bus): bus transmit buffer behind the socket's GPIO14/15 pads",
+      "U3 -> (37.14, 25.19) rot 270 : rung 7 satellite of U2.4 (SERVO_DATA) (shelf B of U2)",
+      "R15 -> (40.14, 24.62) rot 90 : rung 7 satellite of U2.4 (SERVO_DATA) (shelf B of U2)",
+      "R20 -> (34.14, 24.62) rot 90 : rung 7 satellite of U2.4 (SERVO_DATA) (shelf B of U2)",
+      "TP3 -> (39.64, 21.64) rot 0 : rung 7 satellite of U2.4 (SERVO_DATA) (shelf B of U2)",
+      "R12 -> (32.03, 21.00) rot 0 : rung 7 satellite of U2.2 (TXD) (shelf L of U2)",
+      "R16 -> (33.52, 27.33) rot 0 : rung 7 satellite of U3.4 (RXD) (shelf L of U3)",
+      "Q6 -> (28.08, 20.05) rot 0 : rung 7 satellite of U2.1 (TXEN) (shelf L of U2)",
+      "R13 -> (32.03, 19.00) rot 180 : rung 7 satellite of U2.2 (TXD) (shelf L of U2)",
+      "R17 -> (31.28, 23.00) rot 0 : rung 7 satellite of U2.2 (TXD) (shelf L of U2)",
+      "TP1 -> (39.49, 19.00) rot 0 : rung 7 satellite of U2.2 (TXD) (shelf R of U2)",
+      "R18 -> (31.27, 25.33) rot 180 : rung 7 satellite of U3.4 (RXD) (shelf L of U3)",
+      "TP4 -> (36.50, 28.83) rot 0 : rung 7 satellite of U3.4 (RXD) (shelf L of U3)",
+      "R19 -> (28.43, 23.80) rot 90 : rung 7 satellite of Q6.3 (TXEN) (shelf R of Q6)",
+      "TP2 -> (26.02, 23.19) rot 0 : rung 7 satellite of Q6.3 (TXEN) (shelf B of Q6)",
+      "R14 -> (26.52, 26.17) rot 270 : rung 7 satellite of Q6.3 (TXEN) (shelf B of Q6)",
+      "C3 -> (24.39, 26.17) rot 270 : rung 7 satellite of Q6.2 (3V3) (shelf B of Q6)",
+      "C4 -> (23.64, 22.67) rot 270 : rung 7 satellite of Q6.2 (3V3) (shelf B of Q6)",
+      "C5 -> (24.14, 19.92) rot 0 : rung 7 satellite of Q6.2 (3V3) (shelf B of Q6)",
+      "U1 -> (73.25, 40.00) rot 90 : rung 3 block anchor at the brief's target (ina): INA226 beside the shunt, its IN+/IN- side toward the Kelvin taps",
+      "R5 -> (70.25, 43.55) rot 90 : rung 7 satellite of U1.3 (INA_ALERT) (shelf B of U1)",
+      "C2 -> (76.92, 39.85) rot 0 : rung 7 satellite of U1.6 (3V3) (shelf R of U1)",
+      "C1 -> (73.50, 34.95) rot 270 : rung 7 satellite of U1.9 (U1_INA_INN) (shelf T of U1)",
+      "U8 -> (50.50, 26.00) rot 90 : rung 3 block anchor at the brief's target (imu): BNO055 near the board centre under the Pi, away from the buck and the servo rail (spec 3.6). Rot 90 puts pin 1 at the rear-left corner, which by the data sheet's placement figure (P1 is the identity with pin 1 back-right) turns chip +X toward the robot's left and chip +Y toward its rear, as raw_imu.py's normal remap needs",
+      "U9 -> (50.50, 33.00) rot 0 : rung 3 block anchor at the brief's target (imu): BMI088 footprint below the BNO055 (not fitted)",
+      "R34 -> (54.00, 29.15) rot 90 : rung 7 satellite of U8.4 (U8_BNO_BOOT) (shelf B of U8)",
+      "R35 -> (54.67, 25.75) rot 180 : rung 7 satellite of U8.11 (U8_BNO_RST) (shelf R of U8)",
+      "C29 -> (47.00, 29.15) rot 270 : rung 7 satellite of U8.3 (3V3) (shelf B of U8)",
+      "C30 -> (46.33, 26.50) rot 180 : rung 7 satellite of U8.28 (3V3) (shelf L of U8)",
+      "C31 -> (46.50, 32.65) rot 270 : rung 7 satellite of U8.3 (3V3) (shelf B of U8)",
+      "C33 -> (44.33, 28.50) rot 180 : rung 7 satellite of U8.28 (3V3) (shelf L of U8)",
+      "C34 -> (43.83, 30.64) rot 180 : rung 7 satellite of U8.3 (3V3) (shelf L of U8)",
+      "C32 -> (54.67, 23.75) rot 0 : rung 7 satellite of U8.9 (U8_BNO_CAP) (shelf R of U8)",
+      "R36 -> (49.00, 36.77) rot 270 : rung 7 satellite of U9.15 (U8_BMI_SDO1) (shelf B of U9)",
+      "R37 -> (51.50, 36.77) rot 270 : rung 7 satellite of U9.10 (U8_BMI_SDO2) (shelf B of U9)",
+      "J14 -> (58.25, 46.90) rot 90 : rung 3 block anchor at the brief's target (io): Qwiic port at the rear",
+      "D11 -> (27.00, 43.30) rot 0 : rung 3 block anchor at the brief's target (io): status LEDs at the rear, outside the Pi's shadow",
+      "D12 -> (30.00, 43.30) rot 90 : rung 3 block anchor at the brief's target (io): status LED 2",
+      "R40 -> (30.40, 46.05) rot 180 : rung 7 satellite of D11.2 (D11_LED1_A) (shelf R of D11)",
+      "R41 -> (30.00, 39.90) rot 270 : rung 7 satellite of D12.2 (D11_LED2_A) (shelf T of D12)",
+      "U4 -> (12.00, 30.00) rot 0 : rung 3 block anchor at the brief's target (pi): LM74700 ideal diode ahead of the hold-up",
+      "C13 -> (12.00, 38.50) rot 0 : rung 3 block anchor at the brief's target (pi): 470 uF hold-up at the left",
+      "D7 -> (24.00, 43.30) rot 90 : rung 3 block anchor at the brief's target (pi): 5 V power LED with the status LEDs",
+      "L1 -> (12.50, 15.50) rot 0 : rung 3 block anchor at the brief's target (pi): 5.6 uH between the buck and the socket's 5 V end",
+      "U5 -> (12.00, 22.25) rot 0 : rung 3 block anchor at the brief's target (pi): TPS56339 at the left, near the Pi's 5 V pins (socket pads 1 and 3)",
+      "U6 -> (20.50, 27.75) rot 90 : rung 3 block anchor at the brief's target (pi): XC6206 3.3 V under the Pi",
+      "C21 -> (20.50, 30.97) rot 180 : rung 7 bypass cap straddling U6.2 (3V3) and U6.1 (GND)",
+      "Q7 -> (16.19, 30.00) rot 90 : rung 7 satellite of U4.5 (Q7_LM_GATE) (shelf R of U4)",
+      "C12 -> (10.86, 26.38) rot 90 : rung 7 satellite of U4.1 (Q7_LM_VCAP) (shelf T of U4)",
+      "C16 -> (16.19, 26.15) rot 90 : rung 7 satellite of Q7.3 (VPI_IN) (shelf T of Q7)",
+      "C14 -> (18.44, 23.43) rot 90 : rung 7 satellite of Q7.3 (VPI_IN) (shelf T of Q7)",
+      "C15 -> (15.94, 22.43) rot 90 : rung 7 satellite of Q7.3 (VPI_IN) (shelf T of Q7)",
+      "R22 -> (20.75, 23.78) rot 90 : rung 7 satellite of U6.3 (5V) (shelf T of U6)",
+      "R24 -> (20.75, 20.28) rot 90 : rung 7 satellite of U6.3 (5V) (shelf T of U6)",
+      "C20 -> (18.75, 19.78) rot 90 : rung 7 satellite of U6.3 (5V) (shelf T of U6)",
+      "C18 -> (24.34, 29.11) rot 0 : rung 7 satellite of U6.3 (5V) (shelf R of U6)",
+      "C19 -> (28.34, 29.11) rot 0 : rung 7 satellite of U6.3 (5V) (shelf R of U6)",
+      "C17 -> (8.78, 22.25) rot 90 : rung 7 satellite of U5.2 (BUCK_SW) (shelf L of U5)",
+      "R21 -> (13.14, 25.87) rot 270 : rung 7 satellite of U5.6 (Q7_BUCK_BOOT) (shelf B of U5)",
+      "R23 -> (8.78, 25.70) rot 270 : rung 7 satellite of U5.4 (Q7_BUCK_FB) (shelf L of U5)"
+    ],
+    "ran": true,
+    "seconds": 74.9
+  },
+  "route": {
+    "before": 312,
+    "after": 0,
+    "open_by_net": {},
+    "fixes": [],
+    "passes": [
+      [
+        1,
+        42
+      ],
+      [
+        2,
+        19
+      ],
+      [
+        3,
+        12
+      ],
+      [
+        4,
+        3
+      ],
+      [
+        5,
+        1
+      ],
+      [
+        6,
+        1
+      ],
+      [
+        7,
+        1
+      ],
+      [
+        8,
+        1
+      ],
+      [
+        9,
+        1
+      ],
+      [
+        10,
+        1
+      ],
+      [
+        11,
+        0
+      ],
+      [
+        12,
+        0
+      ]
+    ],
+    "stats": {
+      "tracks": 1229,
+      "vias": 109,
+      "length_mm": 2836.2,
+      "length_by_layer_mm": {
+        "B.Cu": 302.4,
+        "F.Cu": 1435.1,
+        "In2.Cu": 1098.7
+      }
+    },
+    "layers": [
+      [
+        "F.Cu",
+        "signal"
+      ],
+      [
+        "In1.Cu",
+        "power"
+      ],
+      [
+        "In2.Cu",
+        "signal"
+      ],
+      [
+        "B.Cu",
+        "signal"
+      ]
+    ],
+    "ladder": [
+      {
+        "rung": 1,
+        "tag": "1_fanout",
+        "classes": {},
+        "fanout": true,
+        "export": {
+          "poursWithheld": 1,
+          "keepoutsMirrored": 1,
+          "clearanceBumpedTo_mm": null,
+          "powerLayers": [
+            "In1.Cu"
+          ],
+          "rewritten": [],
+          "pinShapesOnPlanesDropped": 14,
+          "planes": 0,
+          "canonical": {
+            "images": 62,
+            "renamed": 22,
+            "nets": 117
+          },
+          "viaViaClearance_mm": 0.2
+        },
+        "seconds": 356.6,
+        "ok": true,
+        "log": {
+          "nets": {},
+          "timedOut": false,
+          "noProgress": false,
+          "last_unrouted": 0,
+          "read": true
+        },
+        "widths": {
+          "snapped": 0,
+          "widened": 33,
+          "kept_narrow": 13,
+          "raised_to_min": 0,
+          "below_min_deleted": 0
+        },
+        "shorts_deleted": 0,
+        "keepout_deleted": 0,
+        "drc": {
+          "ran": true,
+          "electrical": 0,
+          "unconnected": 0,
+          "score": 0,
+          "types": {},
+          "shorts": 0,
+          "keepout": 0
+        },
+        "open": 0,
+        "open_by_net": {},
+        "stats": {
+          "tracks": 1229,
+          "vias": 109,
+          "length_mm": 2836.2,
+          "length_by_layer_mm": {
+            "B.Cu": 302.4,
+            "F.Cu": 1435.1,
+            "In2.Cu": 1098.7
+          }
+        }
+      },
+      {
+        "rung": 1,
+        "tag": "1_nofanout",
+        "classes": {},
+        "fanout": false,
+        "export": {
+          "poursWithheld": 1,
+          "keepoutsMirrored": 1,
+          "clearanceBumpedTo_mm": null,
+          "powerLayers": [
+            "In1.Cu"
+          ],
+          "rewritten": [],
+          "pinShapesOnPlanesDropped": 14,
+          "planes": 0,
+          "canonical": {
+            "images": 62,
+            "renamed": 22,
+            "nets": 117
+          },
+          "viaViaClearance_mm": 0.2
+        },
+        "seconds": 139.0,
+        "ok": true,
+        "log": {
+          "nets": {
+            "BUCK_SW": 1,
+            "GND": 2,
+            "I2S_DOUT": 1,
+            "PMID": 1,
+            "QS": 6,
+            "SERVO_DATA": 1,
+            "SNS": 1,
+            "VBAT_CHG": 2,
+            "VSERVO": 1,
+            "VSYS": 3
+          },
+          "timedOut": false,
+          "noProgress": true,
+          "last_unrouted": 19,
+          "read": true
+        },
+        "widths": {
+          "snapped": 0,
+          "widened": 0,
+          "kept_narrow": 0,
+          "raised_to_min": 0,
+          "below_min_deleted": 0
+        },
+        "shorts_deleted": 0,
+        "keepout_deleted": 0,
+        "drc": {
+          "ran": true,
+          "electrical": 0,
+          "unconnected": 19,
+          "score": 19,
+          "types": {},
+          "shorts": 0,
+          "keepout": 0
+        },
+        "open": 19,
+        "open_by_net": {
+          "VSERVO": 1,
+          "GND": 2,
+          "SNS": 1,
+          "SERVO_DATA": 1,
+          "VBAT_CHG": 2,
+          "PMID": 1,
+          "I2S_DOUT": 1,
+          "BUCK_SW": 1,
+          "VSYS": 3,
+          "QS": 6
+        },
+        "stats": {
+          "tracks": 1127,
+          "vias": 110,
+          "length_mm": 2760.0,
+          "length_by_layer_mm": {
+            "B.Cu": 292.2,
+            "F.Cu": 1389.8,
+            "In2.Cu": 1077.9
+          }
+        }
+      }
+    ],
+    "kept_rung": "1_fanout",
+    "classes_routed": {},
+    "fanout_kept": true,
+    "fanout_compare": {
+      "1_fanout": {
+        "open": 0,
+        "score": 0,
+        "vias": 109,
+        "seconds": 356.6
+      },
+      "1_nofanout": {
+        "open": 19,
+        "score": 19,
+        "vias": 110,
+        "seconds": 139.0
+      }
+    },
+    "pad_vias": [
+      "Q1.5",
+      "Q2.5",
+      "Q3.5",
+      "U7.25"
+    ],
+    "timedOut": false,
+    "noProgress": false,
+    "ran": true,
+    "seconds": 503.8
+  },
+  "pour": {
+    "plan": [
+      {
+        "layer": "F.Cu",
+        "net": "GND",
+        "priority": 0
+      },
+      {
+        "layer": "B.Cu",
+        "net": "GND",
+        "priority": 0
+      },
+      {
+        "layer": "In1.Cu",
+        "net": "GND",
+        "priority": 0
+      },
+      {
+        "layer": "In2.Cu",
+        "net": "VSERVO",
+        "priority": 1
+      }
+    ],
+    "open_before": 0,
+    "open_after_pour": 0,
+    "stitch_vias": 0,
+    "open_after_stitch": 0,
+    "island_repair_vias": 0,
+    "open_final": 0,
+    "zones": [
+      {
+        "name": "gnd",
+        "net": "GND",
+        "layers": [
+          "F.Cu",
+          "B.Cu"
+        ],
+        "stitch_vias": 55
+      },
+      {
+        "name": "vbat_in",
+        "net": "VBAT_IN",
+        "layers": [
+          "F.Cu",
+          "B.Cu"
+        ],
+        "stitch_vias": 13
+      },
+      {
+        "name": "vbat_f",
+        "net": "VBAT_F",
+        "layers": [
+          "F.Cu",
+          "B.Cu"
+        ],
+        "stitch_vias": 12
+      },
+      {
+        "name": "vbat_sh",
+        "net": "VBAT_SH",
+        "layers": [
+          "F.Cu",
+          "B.Cu"
+        ],
+        "stitch_vias": 9
+      },
+      {
+        "name": "qs",
+        "net": "QS",
+        "layers": [
+          "F.Cu"
+        ],
+        "stitch_vias": 0
+      },
+      {
+        "name": "vsys",
+        "net": "VSYS",
+        "layers": [
+          "F.Cu",
+          "B.Cu"
+        ],
+        "stitch_vias": 7
+      },
+      {
+        "name": "vservo_q3",
+        "net": "VSERVO",
+        "layers": [
+          "F.Cu",
+          "In2.Cu"
+        ],
+        "stitch_vias": 26
+      },
+      {
+        "name": "vservo_q3_b",
+        "net": "VSERVO",
+        "layers": [
+          "B.Cu"
+        ],
+        "stitch_vias": 0
+      },
+      {
+        "name": "vservo_band_in2",
+        "net": "VSERVO",
+        "layers": [
+          "In2.Cu"
+        ],
+        "stitch_vias": 0
+      },
+      {
+        "name": "vservo_band_b",
+        "net": "VSERVO",
+        "layers": [
+          "B.Cu"
+        ],
+        "stitch_vias": 0
+      }
+    ],
+    "stats": {
+      "tracks": 1229,
+      "vias": 231,
+      "length_mm": 2836.2,
+      "length_by_layer_mm": {
+        "B.Cu": 302.4,
+        "F.Cu": 1435.1,
+        "In2.Cu": 1098.7
+      }
+    },
+    "ran": true,
+    "seconds": 4.4
+  },
+  "silk": {
+    "silk_clipped": 21,
+    "pin_labels": 0,
+    "silk_refused": [],
+    "words": 12,
+    "refs_seated": 57,
+    "refs_hidden": 68,
+    "title_offset_mm": null,
+    "title_lines": 6,
+    "stitch_vias_displaced": 7,
+    "ran": true,
+    "seconds": 2.5
+  },
+  "drc": {
+    "ran": true,
+    "state": "fresh",
+    "board_sha": "abf9d4fb85a564121244c797e8296c800554f4682ce58c8e7a2503b866b7bce2",
+    "errors": 0,
+    "warnings": 8,
+    "unconnected": 0,
+    "parity": 0,
+    "error_types": {},
+    "warning_types": {
+      "lib_footprint_mismatch": 7,
+      "silk_over_copper": 1
+    },
+    "repairs": [],
+    "seconds": 1.5
+  },
+  "dfm": {
+    "ran": true,
+    "profile": "jlcpcb_4layer",
+    "copper_layers": 4,
+    "errors": 0,
+    "warnings": 1,
+    "rows": [
+      {
+        "rule": "footprint_silk_width",
+        "severity": "warning",
+        "count": 517,
+        "min_mm": 0.1,
+        "note": "stock footprint silk down to 0.10 mm; the fab prints it at its 0.15 mm minimum"
+      }
+    ]
+  },
+  "view3d": {
+    "frames": 63,
+    "ran": true,
+    "seconds": 0.1
+  },
+  "fab": {
+    "gerbers": [
+      "quack_core-B_Cu.gbl",
+      "quack_core-B_Mask.gbs",
+      "quack_core-B_Paste.gbp",
+      "quack_core-B_Silkscreen.gbo",
+      "quack_core-Edge_Cuts.gm1",
+      "quack_core-F_Cu.gtl",
+      "quack_core-F_Mask.gts",
+      "quack_core-F_Paste.gtp",
+      "quack_core-F_Silkscreen.gto",
+      "quack_core-In1_Cu.g1",
+      "quack_core-In2_Cu.g2",
+      "quack_core-job.gbrjob"
+    ],
+    "copper_layers": 4,
+    "copper_gerbers": [
+      "quack_core-F_Cu.gtl",
+      "quack_core-In1_Cu.g1",
+      "quack_core-In2_Cu.g2",
+      "quack_core-B_Cu.gbl"
+    ],
+    "gerber_job": {
+      "file": "quack_core-job.gbrjob",
+      "layer_number": 4,
+      "board_thickness_mm": 1.6,
+      "copper_files": [
+        "quack_core-F_Cu.gtl",
+        "quack_core-In1_Cu.g1",
+        "quack_core-In2_Cu.g2",
+        "quack_core-B_Cu.gbl"
+      ],
+      "copper_mm": [
+        0.035,
+        0.035,
+        0.035,
+        0.035
+      ],
+      "dielectric_mm": [
+        0.48,
+        0.48,
+        0.48
+      ],
+      "dielectric": [
+        "FR4",
+        "FR4",
+        "FR4"
+      ]
+    },
+    "drill": [
+      "quack_core.drl",
+      "quack_core-drl_map.gbr"
+    ],
+    "zip": "quack_core_gerbers.zip",
+    "pos": "quack_core_pos.csv",
+    "cpl": "quack_core_cpl_jlc.csv",
+    "cpl_rotations_corrected": 14,
+    "bom": "quack_core_bom.csv",
+    "schematic_pdf": "quack_core_schematic.pdf",
+    "step": "quack_core.step",
+    "ready": true,
+    "blockers": [],
+    "drc_state": "fresh",
+    "ran": true,
+    "seconds": 3.2
+  },
+  "render": {
+    "ran": true,
+    "seconds": 170.3
+  },
+  "video": {
+    "ran": true,
+    "seconds": 28.6
+  }
+}

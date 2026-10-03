@@ -1,0 +1,42 @@
+Quack Core CAD files: attribution and change notice
+====================================================
+
+This directory holds work derived from Open Duck Mini, by Antoine Pirrone
+(apirrone) and contributors:
+
+  https://github.com/apirrone/Open_Duck_Mini  (v2 branch, commit b23317a)
+  Onshape: https://cad.onshape.com/documents/64074dfcfa379b37d8a47762
+
+Open Duck Mini's CAD, STL, URDF and documentation are licensed under the Apache
+License, Version 2.0. A copy of that licence is in this directory as
+LICENSE_Open_Duck_Mini_Apache-2.0.txt. The upstream repository ships no NOTICE
+file, and its LICENSE carries the template copyright line
+("Copyright [yyyy] [name of copyright owner]"); the credit above is the
+project's own (its README and thanks.md).
+
+Modified files
+--------------
+
+body_middle_top_usbc.stl (and body_middle_top_usbc.step, generated)
+  Derived from print/body_middle_top.stl of the repository above.
+  CHANGED by heypcb-kicad's boards/quack_core/cad/fit.py, 2026-10-02: one
+  13.0 x 7.5 mm opening with 1.5 mm corner radii was cut through the right-hand
+  (-y) side wall, centred on the Quack Core board's USB-C receptacle at CAD
+  x -62.0, z -2.87 (research spec item B2). Nothing else was changed. The STEP
+  is a faceted solid sewn from the STL's triangles.
+  fit.py writes both files to build/quack_core/cad/ each time it runs. The STL
+  in this directory is the one it wrote on 2026-10-02. The STEP (about 12 MB,
+  one face per triangle) is not committed; run fit.py to regenerate it.
+
+Unmodified inputs
+-----------------
+
+fit.py reads the print STLs and URDF meshes of the repository above from a
+local copy (robots/research/duck/cad/). It does not redistribute them.
+
+Names and marks
+---------------
+
+Quack Core is a board "for the Open Duck Mini". Apache-2.0 section 6 grants no
+trademark rights; no Disney or BD-X mark is used on the board, in these files
+or in their names.

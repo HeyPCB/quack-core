@@ -1,0 +1,1771 @@
+{
+  "name": "quack_core",
+  "title": "Quack Core - brain board for the Open Duck Mini: Pi Zero 2 W carrier, 2S power path, STS3215 servo bus",
+  "revision": "A",
+  "brief": "Quack Core is the brain board for the Open Duck Mini v2 biped, on the four bosses in its body's rear bay (51.5 x 101 mm, 4 layers). A Raspberry Pi Zero 2 W plugs in face up on a 2x20 SMD socket (Option A of the research spec). The 2S pack enters on an XT30 through an SMAJ10CA TVS, a 20 A NANO2 fuse and a 1 mOhm shunt read by an INA226 (0x40), then a back-to-back AON6411 main switch driven by the robot's existing backpack switch as a logic input, then a default-on AON6411 servo-kill FET (GPIO26, or a latched INA226 alert) onto VSERVO with 2 x 470 uF. A 5 A fused branch feeds the face board (JST-XH J13) and an LM74700 ideal diode + 470 uF hold-up + TPS56339 3 A buck making 5.1 V for the Pi, plus an XC6206 3.3 V rail. A BQ25887 charges the pack from USB-C on the right side wall, with cell balancing through the balance lead. The STS3215 bus driver is the Feetech/Waveshare reference (MMBT3906 auto-direction, 74LVC1G126/125) on the Pi's PL011 UART, with four 5264-type ports (left leg, right leg, neck, spare). A BNO055 at 0x28 and a not-fitted BMI088 footprint, two foot-switch inputs, a JST-GH 12P face-board signal header (spec 4.5 contract), a Qwiic port, a UART fallback header and status LEDs complete it.",
+  "blocks": [
+    {
+      "block": "quackcore_power_in",
+      "refs": {
+        "J?": "J2",
+        "F1?": "F1",
+        "F2?": "F3",
+        "D?": "D1",
+        "R?": "R1"
+      },
+      "as": "pwr",
+      "title": "Pack input: XT30, TVS, 20 A fuse, 1 mOhm shunt, charger fuse",
+      "nets": {
+        "VBAT_IN": "VBAT_IN",
+        "VBAT_F": "VBAT_F",
+        "VBAT_SH": "VBAT_SH",
+        "VBAT_CHG": "VBAT_CHG"
+      }
+    },
+    {
+      "block": "quackcore_ina226",
+      "as": "ina",
+      "title": "INA226 pack monitor (0x40)",
+      "nets": {
+        "VBAT_F": "VBAT_F",
+        "VBAT_SH": "VBAT_SH",
+        "INA_ALERT": "INA_ALERT",
+        "I2C_SDA": "I2C_SDA",
+        "I2C_SCL": "I2C_SCL"
+      }
+    },
+    {
+      "block": "quackcore_main_switch",
+      "refs": {
+        "J?": "J5",
+        "Q1?": "Q1",
+        "Q2?": "Q2"
+      },
+      "as": "msw",
+      "title": "Main switch: back-to-back AON6411, backpack switch on J5",
+      "nets": {
+        "VBAT_SH": "VBAT_SH",
+        "QS": "QS",
+        "QGATE": "QGATE",
+        "SW_N": "SW_N"
+      }
+    },
+    {
+      "block": "quackcore_servo_kill",
+      "refs": {
+        "Q1?": "Q3"
+      },
+      "as": "kill",
+      "title": "Servo kill: AON6411 on VSERVO (GPIO26, INA226 ALERT)",
+      "nets": {
+        "VSERVO": "VSERVO",
+        "SERVO_KILL": "SERVO_KILL",
+        "INA_ALERT": "INA_ALERT",
+        "SK_G": "SK_G",
+        "SK_EN": "SK_EN",
+        "SK_DRV": "SK_DRV"
+      }
+    },
+    {
+      "block": "quackcore_servo_bus",
+      "refs": {
+        "J?": "J16"
+      },
+      "as": "bus",
+      "title": "STS3215 half-duplex driver (Feetech/Waveshare reference)",
+      "nets": {
+        "UART_TX": "UART_TX",
+        "UART_RX": "UART_RX",
+        "UART_RTS": "UART_RTS",
+        "TXD": "TXD",
+        "RXD": "RXD",
+        "TXEN": "TXEN",
+        "DATA": "SERVO_DATA"
+      }
+    },
+    {
+      "block": "quackcore_servo_port",
+      "refs": {
+        "J?": "J6"
+      },
+      "as": "port_l",
+      "title": "Servo port J6: left leg (IDs 20-24)",
+      "nets": {
+        "DATA": "SERVO_DATA",
+        "VSERVO": "VSERVO"
+      }
+    },
+    {
+      "block": "quackcore_servo_port",
+      "refs": {
+        "J?": "J7"
+      },
+      "as": "port_r",
+      "title": "Servo port J7: right leg (IDs 10-14)",
+      "nets": {
+        "DATA": "SERVO_DATA",
+        "VSERVO": "VSERVO"
+      }
+    },
+    {
+      "block": "quackcore_servo_port",
+      "refs": {
+        "J?": "J8"
+      },
+      "as": "port_n",
+      "title": "Servo port J8: neck chain (IDs 30-33)",
+      "nets": {
+        "DATA": "SERVO_DATA",
+        "VSERVO": "VSERVO"
+      }
+    },
+    {
+      "block": "quackcore_servo_port",
+      "refs": {
+        "J?": "J9"
+      },
+      "as": "port_s",
+      "title": "Servo port J9: spare / service",
+      "nets": {
+        "DATA": "SERVO_DATA",
+        "VSERVO": "VSERVO"
+      }
+    },
+    {
+      "block": "quackcore_servo_bulk",
+      "as": "bulk_r",
+      "title": "VSERVO bulk, right",
+      "nets": {
+        "VSERVO": "VSERVO"
+      }
+    },
+    {
+      "block": "quackcore_servo_bulk",
+      "as": "bulk_l",
+      "title": "VSERVO bulk, left",
+      "nets": {
+        "VSERVO": "VSERVO"
+      }
+    },
+    {
+      "block": "quackcore_face_link",
+      "refs": {
+        "J1?": "J12",
+        "J2?": "J13",
+        "F?": "F2"
+      },
+      "as": "face",
+      "title": "Face board link: J12 GH 12P, J13 XH 2P fused VBAT",
+      "nets": {
+        "I2S_BCLK": "I2S_BCLK",
+        "I2S_LRCLK": "I2S_LRCLK",
+        "I2S_DOUT": "I2S_DOUT",
+        "I2S_DIN": "I2S_DIN",
+        "EYE_L": "EYE_L",
+        "EYE_R": "EYE_R",
+        "PROJ": "PROJ",
+        "ANT_L": "ANT_L",
+        "ANT_R": "ANT_R",
+        "VBAT_AUX": "VBAT_AUX"
+      }
+    },
+    {
+      "block": "quackcore_pi_rail",
+      "as": "pi",
+      "title": "Pi rail: ideal diode, 470 uF hold-up, TPS56339 5.1 V, XC6206 3.3 V",
+      "nets": {
+        "VBAT_AUX": "VBAT_AUX",
+        "VPI_IN": "VPI_IN",
+        "BUCK_SW": "BUCK_SW"
+      }
+    },
+    {
+      "block": "quackcore_charger",
+      "refs": {
+        "J1?": "J4",
+        "J2?": "J3"
+      },
+      "as": "chg",
+      "title": "USB-C 2S charger BQ25887 with balancing",
+      "nets": {
+        "VBAT_CHG": "VBAT_CHG",
+        "CHG_INT": "CHG_INT",
+        "PMID": "PMID",
+        "CHG_SW": "CHG_SW",
+        "SNS": "SNS",
+        "VBUS_CHG": "VBUS_CHG",
+        "I2C_SDA": "I2C_SDA",
+        "I2C_SCL": "I2C_SCL"
+      }
+    },
+    {
+      "block": "quackcore_imu",
+      "as": "imu",
+      "title": "IMU: BNO055 0x28 (fitted), BMI088 (not fitted)",
+      "nets": {
+        "I2C_SDA": "I2C_SDA",
+        "I2C_SCL": "I2C_SCL"
+      }
+    },
+    {
+      "block": "quackcore_foot",
+      "refs": {
+        "J?": "J10"
+      },
+      "as": "foot_l",
+      "title": "Left foot switch J10 (GPIO22)",
+      "nets": {
+        "FOOT": "FOOT_L"
+      }
+    },
+    {
+      "block": "quackcore_foot",
+      "refs": {
+        "J?": "J11"
+      },
+      "as": "foot_r",
+      "title": "Right foot switch J11 (GPIO27)",
+      "nets": {
+        "FOOT": "FOOT_R"
+      }
+    },
+    {
+      "block": "quackcore_pi_socket",
+      "refs": {
+        "J?": "J1",
+        "H1?": "H5",
+        "H2?": "H6",
+        "H3?": "H7",
+        "H4?": "H8"
+      },
+      "as": "sock",
+      "title": "Pi Zero 2 W socket (carrier, Option A)",
+      "nets": {
+        "I2C_SDA": "I2C_SDA",
+        "I2C_SCL": "I2C_SCL",
+        "INA_ALERT": "INA_ALERT",
+        "UART_TX": "UART_TX",
+        "UART_RX": "UART_RX",
+        "UART_RTS": "UART_RTS",
+        "I2S_BCLK": "I2S_BCLK",
+        "FOOT_R": "FOOT_R",
+        "FOOT_L": "FOOT_L",
+        "EYE_R": "EYE_R",
+        "EYE_L": "EYE_L",
+        "PROJ": "PROJ",
+        "LED1": "LED1",
+        "LED2": "LED2",
+        "ANT_R": "ANT_R",
+        "ANT_L": "ANT_L",
+        "I2S_LRCLK": "I2S_LRCLK",
+        "CHG_INT": "CHG_INT",
+        "SERVO_KILL": "SERVO_KILL",
+        "I2S_DIN": "I2S_DIN",
+        "I2S_DOUT": "I2S_DOUT"
+      }
+    },
+    {
+      "block": "quackcore_status_io",
+      "refs": {
+        "J?": "J14"
+      },
+      "as": "io",
+      "title": "Status LEDs (GPIO5/6), Qwiic I2C port",
+      "nets": {
+        "LED1": "LED1",
+        "LED2": "LED2",
+        "I2C_SDA": "I2C_SDA",
+        "I2C_SCL": "I2C_SCL"
+      }
+    },
+    {
+      "block": "quackcore_mount_holes",
+      "refs": {
+        "H1?": "H1",
+        "H2?": "H2",
+        "H3?": "H3",
+        "H4?": "H4"
+      },
+      "as": "holes",
+      "title": "M2.5 holes on trunk_top's adapter bosses"
+    }
+  ],
+  "pwrFlags": [
+    "GND",
+    "5V",
+    "VBUS",
+    "VBUS_CHG",
+    "VPI_IN",
+    "VBAT_AUX",
+    "VSYS"
+  ],
+  "netClasses": [
+    {
+      "name": "BATT",
+      "nets": [
+        "VBAT_IN",
+        "VBAT_F",
+        "VBAT_SH"
+      ],
+      "track": 3.0,
+      "clearance": 0.2,
+      "via": [
+        1.2,
+        0.6
+      ],
+      "currentA": 15.0,
+      "why": "the pack current from the XT30 through the fuse and the shunt to the main switch. Every pad on these nets is a power pad (XT30, NANO2, 2512, SMA, 1206 sense taps, the FET's drain pad), so 3 mm reaches each one. Rated in the README from the routed copper (route.ipc2221_amps)"
+    },
+    {
+      "name": "FETLINK",
+      "nets": [
+        "QS",
+        "VSYS"
+      ],
+      "track": 1.2,
+      "clearance": 0.2,
+      "via": [
+        1.0,
+        0.5
+      ],
+      "currentA": 15.0,
+      "why": "the joined sources of the back-to-back switch and the switched rail into the servo-kill FET. Both land on the AON6411's 0.5 x 0.65 mm source leads, 0.92 mm from the drain pad; 1.4 mm is the widest track whose round end at a source lead clears the drain pad by 0.2 mm, and a run along the source row clears it with 1.43 mm; 1.2 mm leaves Freerouting room (at 1.4 mm it could not join Q1's own source leads, 2026-10-02). The FETs are laid source row to source row so these links are about 1 mm long"
+    },
+    {
+      "name": "SERVO",
+      "nets": [
+        "VSERVO"
+      ],
+      "track": 2.5,
+      "clearance": 0.2,
+      "via": [
+        2.2,
+        1.2
+      ],
+      "currentA": 15.0,
+      "why": "the servo rail from the kill FET to the four 5264 ports and the bulk capacitors; 2.5 mm is the widest track that enters the port's middle pin between DATA and GND at 0.25 mm. VSERVO is also poured on In2 after routing (board.pours). Its vias are 2.2 / 1.2 mm: every VSERVO path from the kill FET to the left-hand ports changes layer, and with 1.2 / 0.6 mm vias the whole servo current crossed one 0.6 mm barrel (min-cut 1.35 mm-equivalent, 2026-10-02); the via in the kill FET's drain pad takes this size too"
+    },
+    {
+      "name": "AUX",
+      "nets": [
+        "VBAT_AUX",
+        "VPI_IN",
+        "5V",
+        "BUCK_SW"
+      ],
+      "track": 0.8,
+      "clearance": 0.15,
+      "via": [
+        0.8,
+        0.4
+      ],
+      "currentA": 2.0,
+      "why": "the fused face/Pi branch (2.6 A face peak plus 1.4 A Pi at the pack side), the buck input and the 5.1 V Pi rail (1.8 A peak). 0.8 mm still enters the SOT-23-6 pins of the LM74700 and the TPS56339 at 0.15 mm"
+    },
+    {
+      "name": "USBPWR",
+      "nets": [
+        "VBUS"
+      ],
+      "track": 0.6,
+      "clearance": 0.15,
+      "via": [
+        0.6,
+        0.3
+      ],
+      "currentA": 1.5,
+      "why": "USB-C VBUS from the receptacle to the 2 A PTC beside the charger: 0.6 mm is the receptacle's VBUS pad width (pd_brick: nothing wider enters between its GND and SBU pads), about 1.7 A at a 10 C rise on 1 oz outer copper"
+    },
+    {
+      "name": "CHG",
+      "nets": [
+        "VBUS_CHG",
+        "PMID",
+        "CHG_SW",
+        "SNS",
+        "VBAT_CHG"
+      ],
+      "track": 0.4,
+      "clearance": 0.15,
+      "via": [
+        0.6,
+        0.3
+      ],
+      "currentA": 1.5,
+      "why": "the charger's power nets. They end on the BQ25887's 0.25 mm VQFN pins at 0.5 mm pitch, so 0.4 mm is the widest that enters at 0.15 mm; ILIM caps the input at 1.48 A to match"
+    }
+  ],
+  "board": {
+    "width": 101.0,
+    "height": 51.5,
+    "corner_radius": 2.0,
+    "layers": 4,
+    "origin": [
+      100.0,
+      100.0
+    ],
+    "shape": {
+      "type": "polygon",
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          21.45,
+          0
+        ],
+        [
+          22.25,
+          0.8
+        ],
+        [
+          78.75,
+          0.8
+        ],
+        [
+          79.55,
+          0
+        ],
+        [
+          101.0,
+          0
+        ],
+        [
+          101.0,
+          51.5
+        ],
+        [
+          0,
+          51.5
+        ]
+      ],
+      "fillets": [
+        2.0,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        2.0,
+        2.0,
+        2.0
+      ],
+      "why": "the spec's 51.5 x 101 mm rectangle with its front edge set back 0.8 mm where it overhangs trunk_top's tongue (CAD |y| <= 28.25): there the tongue-to-wall chamfer rises 1:1 and reaches z -5.99 at the front edge, 0.11 mm above the boss tips the board sits on (measured on trunk_top.stl, 2026-10-02). Set back, the bottom edge clears the chamfer by 0.69 mm horizontally"
+    },
+    "rules": {
+      "clearance": 0.15,
+      "track": 0.2,
+      "via": [
+        0.6,
+        0.3
+      ],
+      "edge_clearance": 0.5,
+      "hole_to_hole": 0.5,
+      "min_through_hole": 0.3,
+      "min_track": 0.1,
+      "why_rules": "0.15 mm clearance and 0.2 mm default track inside JLC's multilayer window (0.09 mm): the socket, the VQFN charger and the LGA IMU all sit under the Pi"
+    },
+    "planes": {
+      "In1.Cu": "GND"
+    },
+    "pours": {
+      "In2.Cu": "VSERVO"
+    },
+    "keepouts": [
+      {
+        "name": "q1_source_slot",
+        "rect": [
+          82.7,
+          18.2,
+          88.3,
+          18.42
+        ],
+        "layers": [
+          "F.Cu"
+        ],
+        "no": [
+          "tracks",
+          "vias"
+        ],
+        "why": "the far side of the 0.67 mm slot between Q1's source leads and its drain pad, beyond the 1.2 mm QS track's half width: Freerouting threaded the gate line through the slot and cut Q1's source lead 1 off from QS (2026-10-02); a keep-out over the whole slot also banned QS's own track along the leads (6 open)"
+      },
+      {
+        "name": "q2_source_slot",
+        "rect": [
+          83.9,
+          15.3,
+          89.6,
+          15.55
+        ],
+        "layers": [
+          "F.Cu"
+        ],
+        "no": [
+          "tracks",
+          "vias"
+        ],
+        "why": "the same slot under Q2's source leads"
+      },
+      {
+        "name": "q3_source_slot",
+        "rect": [
+          84.0,
+          8.44,
+          89.6,
+          8.7
+        ],
+        "layers": [
+          "F.Cu"
+        ],
+        "no": [
+          "tracks",
+          "vias"
+        ],
+        "why": "the same slot under Q3's source leads"
+      },
+      {
+        "name": "usbc_channel",
+        "rect": [
+          89.8,
+          14.7,
+          92.0,
+          25.5
+        ],
+        "layers": [
+          "F.Cu"
+        ],
+        "no": [
+          "footprints"
+        ],
+        "why": "keeps parts out of the strip between the power column and the USB-C, which VBUS and CC need to reach the charger"
+      },
+      {
+        "name": "boss_h1",
+        "circle": {
+          "at": [
+            36.5,
+            5.0
+          ],
+          "d": 5.5
+        },
+        "layers": "all",
+        "no": [
+          "tracks",
+          "vias"
+        ],
+        "why": "M2.5 screw head on top and the trunk_top boss under it (spec 2.7: 5.5 mm pad keep-out)"
+      },
+      {
+        "name": "boss_h2",
+        "circle": {
+          "at": [
+            64.5,
+            5.0
+          ],
+          "d": 5.5
+        },
+        "layers": "all",
+        "no": [
+          "tracks",
+          "vias"
+        ],
+        "why": "M2.5 screw head on top and the trunk_top boss under it (spec 2.7: 5.5 mm pad keep-out)"
+      },
+      {
+        "name": "boss_h3",
+        "circle": {
+          "at": [
+            36.5,
+            42.12
+          ],
+          "d": 5.5
+        },
+        "layers": "all",
+        "no": [
+          "tracks",
+          "vias"
+        ],
+        "why": "M2.5 screw head on top and the trunk_top boss under it (spec 2.7: 5.5 mm pad keep-out)"
+      },
+      {
+        "name": "boss_h4",
+        "circle": {
+          "at": [
+            64.5,
+            42.12
+          ],
+          "d": 5.5
+        },
+        "layers": "all",
+        "no": [
+          "tracks",
+          "vias"
+        ],
+        "why": "M2.5 screw head on top and the trunk_top boss under it (spec 2.7: 5.5 mm pad keep-out)"
+      },
+      {
+        "name": "pi_standoff_h1",
+        "circle": {
+          "at": [
+            21.5,
+            12.5
+          ],
+          "d": 6.0
+        },
+        "layers": "all",
+        "no": [
+          "tracks",
+          "vias"
+        ],
+        "why": "the Pi's M2.5 standoff on top and its screw head below"
+      },
+      {
+        "name": "pi_standoff_h2",
+        "circle": {
+          "at": [
+            79.5,
+            12.5
+          ],
+          "d": 6.0
+        },
+        "layers": "all",
+        "no": [
+          "tracks",
+          "vias"
+        ],
+        "why": "the Pi's M2.5 standoff on top and its screw head below"
+      },
+      {
+        "name": "pi_standoff_h3",
+        "circle": {
+          "at": [
+            21.5,
+            35.5
+          ],
+          "d": 6.0
+        },
+        "layers": "all",
+        "no": [
+          "tracks",
+          "vias"
+        ],
+        "why": "the Pi's M2.5 standoff on top and its screw head below"
+      },
+      {
+        "name": "pi_standoff_h4",
+        "circle": {
+          "at": [
+            79.5,
+            35.5
+          ],
+          "d": 6.0
+        },
+        "layers": "all",
+        "no": [
+          "tracks",
+          "vias"
+        ],
+        "why": "the Pi's M2.5 standoff on top and its screw head below"
+      }
+    ],
+    "zones": [
+      {
+        "name": "gnd",
+        "net": "GND",
+        "layers": [
+          "F.Cu",
+          "B.Cu"
+        ],
+        "stitch": 4.0,
+        "via": [
+          0.6,
+          0.3
+        ],
+        "priority": 0,
+        "rect": [
+          0,
+          0,
+          101.0,
+          51.5
+        ],
+        "why": "GND on both outer layers under every power zone, with its own 4 mm via lattice: a board.zones zone joins pads solid, so the XT30's - pad and the ports' GND pins lose their thermal spokes. A GND zone makes the plan's GND stitcher place nothing (it needs the ring inside every GND fill), so this zone stitches GND itself (2026-10-03)"
+      },
+      {
+        "name": "vbat_in",
+        "net": "VBAT_IN",
+        "layers": [
+          "F.Cu",
+          "B.Cu"
+        ],
+        "stitch": 1.2,
+        "via": [
+          0.6,
+          0.3
+        ],
+        "priority": 1,
+        "polygon": [
+          [
+            82.6,
+            35.75
+          ],
+          [
+            93.0,
+            35.75
+          ],
+          [
+            93.0,
+            45.25
+          ],
+          [
+            79.0,
+            45.25
+          ],
+          [
+            79.0,
+            39.2
+          ],
+          [
+            82.6,
+            39.2
+          ]
+        ],
+        "why": "F1's input pad to J2's + pad and F3's tap, on both outer layers; left edge clear of the Pi standoff at (79.5, 35.5)"
+      },
+      {
+        "name": "vbat_f",
+        "net": "VBAT_F",
+        "layers": [
+          "F.Cu",
+          "B.Cu"
+        ],
+        "stitch": 1.2,
+        "via": [
+          0.6,
+          0.3
+        ],
+        "priority": 2,
+        "polygon": [
+          [
+            79.9,
+            27.9
+          ],
+          [
+            90.2,
+            27.9
+          ],
+          [
+            90.2,
+            35.6
+          ],
+          [
+            82.6,
+            35.6
+          ],
+          [
+            82.6,
+            34.3
+          ],
+          [
+            82.1,
+            33.6
+          ],
+          [
+            81.5,
+            33.0
+          ],
+          [
+            80.4,
+            32.5
+          ],
+          [
+            79.9,
+            32.3
+          ]
+        ],
+        "why": "F1's output pad to the shunt's fuse-side pad"
+      },
+      {
+        "name": "vbat_sh",
+        "net": "VBAT_SH",
+        "layers": [
+          "F.Cu",
+          "B.Cu"
+        ],
+        "stitch": 1.2,
+        "via": [
+          0.6,
+          0.3
+        ],
+        "priority": 3,
+        "rect": [
+          79.9,
+          18.45,
+          90.2,
+          27.75
+        ],
+        "why": "the shunt's switch-side pad to Q1's drain pad"
+      },
+      {
+        "name": "qs",
+        "net": "QS",
+        "layers": [
+          "F.Cu"
+        ],
+        "priority": 4,
+        "rect": [
+          79.9,
+          15.65,
+          88.3,
+          18.15
+        ],
+        "why": "the 0.7 mm gap between Q1's and Q2's source rows, filled solid"
+      },
+      {
+        "name": "vsys",
+        "net": "VSYS",
+        "layers": [
+          "F.Cu",
+          "B.Cu"
+        ],
+        "stitch": 1.2,
+        "via": [
+          0.6,
+          0.3
+        ],
+        "priority": 5,
+        "rect": [
+          82.6,
+          8.8,
+          94.5,
+          15.45
+        ],
+        "why": "Q2's drain to Q3's sources, F2 and the kill gate pull-up"
+      },
+      {
+        "name": "vservo_q3",
+        "net": "VSERVO",
+        "layers": [
+          "F.Cu",
+          "In2.Cu"
+        ],
+        "stitch": 1.2,
+        "via": [
+          0.6,
+          0.3
+        ],
+        "priority": 7,
+        "polygon": [
+          [
+            67.6,
+            0.85
+          ],
+          [
+            91.5,
+            0.85
+          ],
+          [
+            91.5,
+            3.9
+          ],
+          [
+            94.1,
+            3.9
+          ],
+          [
+            94.1,
+            0.85
+          ],
+          [
+            96.5,
+            0.85
+          ],
+          [
+            96.5,
+            3.9
+          ],
+          [
+            97.6,
+            3.9
+          ],
+          [
+            97.6,
+            9.7
+          ],
+          [
+            94.5,
+            9.7
+          ],
+          [
+            94.5,
+            8.55
+          ],
+          [
+            76.6,
+            8.55
+          ],
+          [
+            76.6,
+            7.8
+          ],
+          [
+            67.6,
+            7.8
+          ]
+        ],
+        "why": "Q3's drain to C10, J7 and C7 on F.Cu and In2, stitched to B.Cu, J7's DATA and GND pins left out"
+      },
+      {
+        "name": "vservo_q3_b",
+        "net": "VSERVO",
+        "layers": [
+          "B.Cu"
+        ],
+        "priority": 8,
+        "polygon": [
+          [
+            67.6,
+            0.85
+          ],
+          [
+            90.6,
+            0.85
+          ],
+          [
+            90.6,
+            8.55
+          ],
+          [
+            76.6,
+            8.55
+          ],
+          [
+            76.6,
+            7.8
+          ],
+          [
+            67.6,
+            7.8
+          ]
+        ],
+        "why": "Q3's corner on B.Cu, stopping short of J7 so that J7's GND pin keeps B.Cu ground down the right edge"
+      },
+      {
+        "name": "vservo_band_in2",
+        "net": "VSERVO",
+        "layers": [
+          "In2.Cu"
+        ],
+        "priority": 6,
+        "polygon": [
+          [
+            1.2,
+            0.85
+          ],
+          [
+            67.7,
+            0.85
+          ],
+          [
+            67.7,
+            9.3
+          ],
+          [
+            1.2,
+            9.3
+          ]
+        ],
+        "why": "the servo rail along the front edge on In2, to J8, C11 and J6"
+      },
+      {
+        "name": "vservo_band_b",
+        "net": "VSERVO",
+        "layers": [
+          "B.Cu"
+        ],
+        "priority": 6,
+        "polygon": [
+          [
+            1.2,
+            0.85
+          ],
+          [
+            67.7,
+            0.85
+          ],
+          [
+            67.7,
+            7.7
+          ],
+          [
+            75.8,
+            7.7
+          ],
+          [
+            75.8,
+            16.6
+          ],
+          [
+            25.2,
+            16.6
+          ],
+          [
+            25.2,
+            9.4
+          ],
+          [
+            1.2,
+            9.4
+          ]
+        ],
+        "why": "the servo rail on B.Cu along the front edge and under the Pi socket (B.Cu there carries only vias), to J8, C11 and J6; clear of the Pi standoffs"
+      }
+    ],
+    "notes": "Frame: KiCad x = 50.5 - y_CAD, KiCad y = -42.0 - x_CAD (mm from the board's top-left corner; top edge = the front edge at CAD x -42.0, right edge = the robot's right side). 4 layers: F.Cu / In1 GND plane / In2 routing, then a VSERVO pour / B.Cu."
+  },
+  "placement": {
+    "holes:H1?": {
+      "lock": [
+        36.5,
+        5.0
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "on the trunk_top boss at CAD (-47.00, 14.00)"
+    },
+    "holes:H2?": {
+      "lock": [
+        64.5,
+        5.0
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "on the trunk_top boss at CAD (-47.00, -14.00)"
+    },
+    "holes:H3?": {
+      "lock": [
+        36.5,
+        42.12
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "on the trunk_top boss at CAD (-84.12, 14.00)"
+    },
+    "holes:H4?": {
+      "lock": [
+        64.5,
+        42.12
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "on the trunk_top boss at CAD (-84.12, -14.00)"
+    },
+    "sock:H1?": {
+      "lock": [
+        21.5,
+        12.5
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "Pi Zero 2 W mounting hole (58 x 23 mm pattern), CAD (-54.50, 29.00)"
+    },
+    "sock:H2?": {
+      "lock": [
+        79.5,
+        12.5
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "Pi Zero 2 W mounting hole (58 x 23 mm pattern), CAD (-54.50, -29.00)"
+    },
+    "sock:H3?": {
+      "lock": [
+        21.5,
+        35.5
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "Pi Zero 2 W mounting hole (58 x 23 mm pattern), CAD (-77.50, 29.00)"
+    },
+    "sock:H4?": {
+      "lock": [
+        79.5,
+        35.5
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "Pi Zero 2 W mounting hole (58 x 23 mm pattern), CAD (-77.50, -29.00)"
+    },
+    "sock:J?": {
+      "lock": [
+        50.5,
+        12.5
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "socket centred on the Pi header: Pi pin 1 at (26.37, 13.77) = CAD (-55.77, +24.13); rot 90 puts pad 1 at the left end of the front row"
+    },
+    "pwr:J?": {
+      "lock": [
+        85.5,
+        47.8
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "XT30 at the rear right (CAD -87.3, -35.0): pad 2 (+, the flat end of the housing) toward the fuse at (85.5, 42.8), pad 1 (-, the chamfered end) at the rear; |y| > 26 keeps its leads off the tongue"
+    },
+    "pwr:F1?": {
+      "lock": [
+        85.5,
+        35.67
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "20 A fuse straight above the XT30's + pin"
+    },
+    "pwr:R?": {
+      "lock": [
+        85.5,
+        27.81
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "1 mOhm shunt straight above the fuse"
+    },
+    "msw:Q1?": {
+      "lock": [
+        85.5,
+        20.3
+      ],
+      "from_center": false,
+      "rot": 270,
+      "why": "Q1 drain pad against the shunt, source row facing Q2"
+    },
+    "msw:Q2?": {
+      "lock": [
+        86.77,
+        13.44
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "Q2 source row facing Q1's, one lead pitch (1.27 mm) to the right, so all three source pairs face each other and both gates sit at the open ends of the gap (QS is three ~1 mm stubs); drain pad (VSYS) facing Q3's source row. Aligned, Q2's gate faced Q1's source 1 and the gate route cut it off (2026-10-02)"
+    },
+    "kill:Q1?": {
+      "lock": [
+        86.77,
+        6.58
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "servo-kill FET at the front of the column, in line with Q2 so all three source leads face Q2's drain leads (VSYS is three ~1 mm stubs; offset by a lead pitch, only two faced and the measured VSYS cross-section was 1.8 mm, 2026-10-02); drain pad (VSERVO) toward the front-edge ports"
+    },
+    "pwr:D?": {
+      "lock": [
+        80.5,
+        45.3
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "input TVS across the XT30 pins, left of it"
+    },
+    "pwr:F2?": {
+      "lock": [
+        90.6,
+        40.6
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "charger fuse beside the XT30's + pin, feeding the charger above it"
+    },
+    "face:F?": {
+      "lock": [
+        93.5,
+        12.7
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "5 A fuse for the face and Pi branch, its VSYS pad 2.5 mm from Q2's drain pad"
+    },
+    "port_r:J?": {
+      "lock": [
+        97.7,
+        2.6
+      ],
+      "from_center": false,
+      "rot": 180,
+      "why": "J7 right leg at the front right (CAD -44.6, -47.0), under the right hip slot"
+    },
+    "bulk_r:C?": {
+      "lock": [
+        77.6,
+        4.25
+      ],
+      "from_center": false,
+      "rot": 180,
+      "why": "470 uF beside the kill FET's drain pad, + toward it"
+    },
+    "port_l:J?": {
+      "lock": [
+        9.3,
+        2.6
+      ],
+      "from_center": false,
+      "rot": 180,
+      "why": "J6 left leg at the front left (CAD -44.6, +45.9), under the left hip slot"
+    },
+    "port_n:J?": {
+      "lock": [
+        20.5,
+        2.6
+      ],
+      "from_center": false,
+      "rot": 180,
+      "why": "J8 neck chain at the front left, beside J6; its cable rises to the roof opening"
+    },
+    "bulk_l:C?": {
+      "lock": [
+        28.6,
+        4.25
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "470 uF at the left end of the servo rail, between J8 and the left boss"
+    },
+    "face:J1?": {
+      "lock": [
+        50.5,
+        4.55
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "J12 GH 12P (top entry) centred between the two front bosses, under the roof opening"
+    },
+    "chg:J2?": {
+      "lock": [
+        97.0,
+        48.5
+      ],
+      "from_center": false,
+      "rot": 180,
+      "why": "J3 balance lead at the rear right, beside the pack leads' gap (|y| > 26: leads clear of the tongue)"
+    },
+    "port_s:J?": {
+      "lock": [
+        35.77,
+        49.0
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "J9 spare port at the rear, its leads 0.9 mm behind the tongue's end (x -91.0 < -90.1). In the rear-left corner its DATA line was left open on one build; at x 34.5 its 10 uF landed on the DATA side, where the 2.5 mm VSERVO class could not reach it; at x 35.77 the placer puts the 10 uF beside the boss and every connection routed (2026-10-02)"
+    },
+    "foot_l:J?": {
+      "lock": [
+        2.9,
+        33.0
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "J10 left foot at the left edge"
+    },
+    "face:J2?": {
+      "lock": [
+        3.4,
+        24.0
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "J13 face power at the left edge, under the left half of the roof opening"
+    },
+    "foot_r:J?": {
+      "lock": [
+        74.0,
+        49.0
+      ],
+      "from_center": false,
+      "rot": 180,
+      "why": "J11 right foot at the rear, leads behind the tongue's end (x < -90.1)"
+    },
+    "msw:J?": {
+      "lock": [
+        50.5,
+        49.0
+      ],
+      "from_center": false,
+      "rot": 180,
+      "why": "J5 backpack switch at the rear centre, leads behind the tongue's end (x < -90.1)"
+    },
+    "chg:J1?": {
+      "edge": "right",
+      "y": -5.75,
+      "overhang": 1.0,
+      "why": "USB-C in the right side wall at CAD x -62.0 (spec B2); the mouth 1.0 mm past the board edge, 0.5 mm inside the wall's inner face"
+    },
+    "bus:J?": {
+      "lock": [
+        16.0,
+        47.5
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "J16 external UART header at the rear left (leads clear of the tongue)"
+    },
+    "ina:U?": {
+      "at": [
+        75.0,
+        27.75
+      ],
+      "why": "INA226 beside the shunt, its IN+/IN- side toward the Kelvin taps"
+    },
+    "chg:U?": {
+      "lock": [
+        63.0,
+        29.5
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "BQ25887 under the Pi's right half, where its satellites have room (beside the USB-C every analog pin was walled in and one was left open on each of three builds, 2026-10-02): VBUS and PMID on its top row, SW, SNS and BAT on its right side toward the inductor and their capacitors, the analog pins on its bottom row"
+    },
+    "chg:L?": {
+      "lock": [
+        68.0,
+        26.0
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "1 uH above-right: pad 1 (PMID) toward the top row, pad 2 (SW) above the SW pins"
+    },
+    "chg:F?": {
+      "lock": [
+        58.1,
+        25.6
+      ],
+      "from_center": false,
+      "rot": 270,
+      "why": "2 A PTC where the long VBUS run from the USB-C ends: VBUS (0.6 mm class) on pad 1, VBUS_CHG on pad 2 beside the 1 uF"
+    },
+    "chg:C1?": {
+      "lock": [
+        60.1,
+        25.6
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "VBUS 1 uF between the PTC and pin 23"
+    },
+    "chg:C2?": {
+      "lock": [
+        63.0,
+        25.0
+      ],
+      "from_center": false,
+      "rot": 180,
+      "why": "PMID 22 uF over the PMID pins, its PMID pad toward the inductor"
+    },
+    "chg:C5?": {
+      "lock": [
+        67.9,
+        30.6
+      ],
+      "from_center": false,
+      "rot": 270,
+      "why": "SNS 22 uF right of the SNS pins, below the SW line to the inductor"
+    },
+    "chg:C6?": {
+      "lock": [
+        69.9,
+        30.6
+      ],
+      "from_center": false,
+      "rot": 270,
+      "why": "second SNS 22 uF"
+    },
+    "chg:C7?": {
+      "lock": [
+        68.4,
+        34.1
+      ],
+      "from_center": false,
+      "rot": 270,
+      "why": "BAT 10 uF below the SNS capacitors"
+    },
+    "chg:C3?": {
+      "lock": [
+        66.15,
+        33.8
+      ],
+      "from_center": false,
+      "rot": 270,
+      "why": "BTST 47 nF under the BTST pin"
+    },
+    "chg:C4?": {
+      "lock": [
+        64.4,
+        33.9
+      ],
+      "from_center": false,
+      "rot": 270,
+      "why": "REGN 4.7 uF under the REGN pin, right of the TS / ILIM / MID / CBSET pins so they leave straight down"
+    },
+    "chg:R4?": {
+      "lock": [
+        58.0,
+        37.2
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "TS divider top (REGN to TS) in a fan under the analog pins"
+    },
+    "chg:R5?": {
+      "lock": [
+        59.6,
+        37.2
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "TS divider bottom"
+    },
+    "chg:R3?": {
+      "lock": [
+        61.2,
+        37.2
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "ILIM 750 ohm in the fan"
+    },
+    "chg:R6?": {
+      "lock": [
+        62.8,
+        37.2
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "MID 330 ohm in the fan"
+    },
+    "chg:R7?": {
+      "lock": [
+        66.8,
+        37.5
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "CBSET 100 ohm right of the fan; left to the shelves, the fan's resistors walled the analog pins in (ILIM and MID open, 2026-10-02)"
+    },
+    "chg:R9?": {
+      "lock": [
+        71.6,
+        34.0
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "CHG LED resistor (REGN to the LED) right of the charger's capacitors; placed by the placer it sat under the TS / ILIM / MID pins and MID was left open (2026-10-02)"
+    },
+    "chg:D?": {
+      "at": [
+        92.0,
+        27.8
+      ],
+      "why": "CHG LED beside the USB-C, below the receptacle"
+    },
+    "ina:R1?": {
+      "lock": [
+        80.2,
+        30.77
+      ],
+      "from_center": false,
+      "rot": 180,
+      "why": "IN+ filter resistor on the shunt's fuse-side pad"
+    },
+    "ina:R2?": {
+      "lock": [
+        80.2,
+        24.75
+      ],
+      "from_center": false,
+      "rot": 180,
+      "why": "IN- filter resistor on the shunt's switch-side pad"
+    },
+    "ina:R3?": {
+      "lock": [
+        80.2,
+        22.3
+      ],
+      "from_center": false,
+      "rot": 180,
+      "why": "VBUS resistor on Q1's drain pad"
+    },
+    "msw:R1?": {
+      "lock": [
+        81.0,
+        17.9
+      ],
+      "from_center": false,
+      "rot": 270,
+      "why": "gate pull-up (QGATE to QS) left of the source gap: its QS pad level with the gap, where QS leaves between Q1's gate and Q2's drain pad, its gate pad below toward Q1's gate"
+    },
+    "msw:R2?": {
+      "at": [
+        78.0,
+        20.5
+      ],
+      "why": "gate pull-down to the switch line beside the pull-up"
+    },
+    "kill:R1?": {
+      "lock": [
+        92.15,
+        8.55
+      ],
+      "from_center": false,
+      "rot": 180,
+      "why": "servo-kill gate pull-up: its VSYS pad over the aux fuse's VSYS pad, its gate pad toward Q3's gate"
+    },
+    "port_r:C?": {
+      "lock": [
+        97.0,
+        8.55
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "J7's 10 uF under its V pin"
+    },
+    "port_r:D?": {
+      "lock": [
+        100.0,
+        8.55
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "J7's DATA ESD at the right edge"
+    },
+    "kill:Q2?": {
+      "at": [
+        72.0,
+        13.0
+      ],
+      "why": "servo-kill gate driver on the SK_G line, under the Pi"
+    },
+    "pi:U2?": {
+      "at": [
+        12.0,
+        21.0
+      ],
+      "why": "TPS56339 at the left, near the Pi's 5 V pins (socket pads 1 and 3)"
+    },
+    "pi:L?": {
+      "at": [
+        12.0,
+        14.0
+      ],
+      "why": "5.6 uH between the buck and the socket's 5 V end"
+    },
+    "pi:C2?": {
+      "at": [
+        12.0,
+        38.5
+      ],
+      "why": "470 uF hold-up at the left"
+    },
+    "pi:U1?": {
+      "at": [
+        12.0,
+        30.0
+      ],
+      "why": "LM74700 ideal diode ahead of the hold-up"
+    },
+    "pi:U3?": {
+      "at": [
+        30.0,
+        20.0
+      ],
+      "why": "XC6206 3.3 V under the Pi"
+    },
+    "bus:U1?": {
+      "at": [
+        36.0,
+        21.0
+      ],
+      "why": "bus transmit buffer behind the socket's GPIO14/15 pads"
+    },
+    "imu:U1?": {
+      "at": [
+        50.5,
+        26.0
+      ],
+      "why": "BNO055 near the board centre under the Pi, away from the buck and the servo rail (spec 3.6). Rot 90 puts pin 1 at the rear-left corner, which by the data sheet's placement figure (P1 is the identity with pin 1 back-right) turns chip +X toward the robot's left and chip +Y toward its rear, as raw_imu.py's normal remap needs",
+      "rot": 90
+    },
+    "imu:U2?": {
+      "at": [
+        50.5,
+        33.0
+      ],
+      "why": "BMI088 footprint below the BNO055 (not fitted)"
+    },
+    "io:J?": {
+      "at": [
+        58.5,
+        47.9
+      ],
+      "why": "Qwiic port at the rear"
+    },
+    "io:D1?": {
+      "at": [
+        27.0,
+        43.3
+      ],
+      "why": "status LEDs at the rear, outside the Pi's shadow"
+    },
+    "io:D2?": {
+      "at": [
+        29.5,
+        43.3
+      ],
+      "why": "status LED 2"
+    },
+    "pi:D?": {
+      "at": [
+        24.5,
+        43.3
+      ],
+      "why": "5 V power LED with the status LEDs"
+    }
+  },
+  "route": {
+    "passes": 40,
+    "fanout": true,
+    "solve_s": 900,
+    "via_in_pad_mm": 2.6,
+    "why": "a via in the BQ25887's exposed pad and in each AON6411 drain pad (the smallest side of both is over 2.6 mm), so the kill FET's drain reaches the In2 VSERVO pour; the ladder narrows only classes without a current budget, and the stated outline is never grown"
+  },
+  "stitch_pitch": 5.0,
+  "silk": {
+    "words": {
+      "pwr:J?": "BATT",
+      "chg:J1?": "USB-C CHARGE",
+      "chg:J2?": "BALANCE",
+      "msw:J?": "SWITCH",
+      "port_l:J?": "L LEG",
+      "port_r:J?": "R LEG",
+      "port_n:J?": "NECK",
+      "port_s:J?": "SPARE",
+      "foot_l:J?": "FOOT L",
+      "foot_r:J?": "FOOT R",
+      "face:J1?": "FACE",
+      "face:J2?": "FACE PWR",
+      "io:J?": "QWIIC",
+      "bus:J?": "UART",
+      "pi:D?": "5V",
+      "chg:D?": "CHG",
+      "io:D1?": "LED1",
+      "io:D2?": "LED2",
+      "pwr:F1?": "20A",
+      "sock:J?": "PI ZERO 2 W"
+    },
+    "switches": [
+      {
+        "part": "port_l:J?",
+        "pads": [
+          "1",
+          "2",
+          "3"
+        ],
+        "words": {
+          "SERVO_DATA": "D",
+          "VSERVO": "V",
+          "GND": "G"
+        },
+        "why": "the port's pin order beside each pin: D (data), V (servo supply), G (ground), as on the Waveshare adapter"
+      },
+      {
+        "part": "port_r:J?",
+        "pads": [
+          "1",
+          "2",
+          "3"
+        ],
+        "words": {
+          "SERVO_DATA": "D",
+          "VSERVO": "V",
+          "GND": "G"
+        },
+        "why": "as J6"
+      },
+      {
+        "part": "port_n:J?",
+        "pads": [
+          "1",
+          "2",
+          "3"
+        ],
+        "words": {
+          "SERVO_DATA": "D",
+          "VSERVO": "V",
+          "GND": "G"
+        },
+        "why": "as J6"
+      },
+      {
+        "part": "port_s:J?",
+        "pads": [
+          "1",
+          "2",
+          "3"
+        ],
+        "words": {
+          "SERVO_DATA": "D",
+          "VSERVO": "V",
+          "GND": "G"
+        },
+        "why": "as J6"
+      }
+    ],
+    "polarity": [
+      {
+        "part": "pwr:J?",
+        "net": "VBAT_IN",
+        "why": "pack + on XT30 pad 2, - on pad 1 (the footprint's own marks)"
+      },
+      {
+        "part": "face:J2?",
+        "net": "VBAT_AUX",
+        "why": "face power: VBAT on pin 1, GND on pin 2"
+      }
+    ],
+    "title": [
+      {
+        "text": "Quack Core",
+        "y": 22.0,
+        "size": 2.0,
+        "bold": true
+      },
+      {
+        "text": "brain board for the Open Duck Mini",
+        "y": 25.2,
+        "size": 1.0
+      },
+      {
+        "text": "Pi Zero 2 W carrier / 2S / STS3215 bus",
+        "y": 27.4,
+        "size": 0.8
+      },
+      {
+        "text": "rev {revision}  heypcb-kicad  not fabricated",
+        "y": 29.4,
+        "size": 0.8
+      },
+      {
+        "text": "servo ports 1 D  2 V  3 G: J6 L LEG  J7 R LEG  J8 NECK  J9 SPARE",
+        "y": 32.0,
+        "size": 0.8
+      },
+      {
+        "text": "J2 XT30 1 -  2 +   J13 FACE PWR 1 +  2 -   J3 BAL 2 MID",
+        "y": 34.0,
+        "size": 0.8
+      }
+    ]
+  },
+  "captions": {
+    "place_3d": "Placed: the Pi socket across the middle, the power column (XT30, fuse, shunt, three AON6411) down the right side, servo ports along the front edge, USB-C charger on the right wall.",
+    "done_3d": "Quack Core: Pi Zero 2 W carrier, XT30 + 20 A fuse + INA226 shunt, back-to-back main switch, servo kill, BQ25887 USB-C charger, Feetech half-duplex bus, BNO055."
+  }
+}
